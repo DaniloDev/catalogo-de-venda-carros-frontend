@@ -2,8 +2,10 @@ import React from 'react'
 
 export default function footer() {
   return (
-    <div className='footer'>
-        <span>Made by- <a href='https://git.com/DaniloDev'>Danilo</a></span>
-    </div>
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Danilo Santos Nascimento / Fullstack</p>
+      </div>
+    </footer>
   )
 }

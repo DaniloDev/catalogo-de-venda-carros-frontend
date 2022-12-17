@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   min-width: 100vw;
-  background-color: #383838
+  background-color: #343a40;
 
 `
 
@@ -41,7 +41,7 @@ export const Form = styled.form`
 `
 
 export const SubContainerSign = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: row;
   gap: 0px 20px;
   align-items: center;

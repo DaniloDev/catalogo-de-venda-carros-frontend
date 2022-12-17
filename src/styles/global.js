@@ -43,20 +43,23 @@ h1 span {
 .dictionary {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 4rem auto;
   max-width: 90%;
 }
 
 .dictionary > .term {
+  margin-top: 3rem;
+  margin-right: 10px;
   text-align: center;
   max-width: 20rem;
   margin-bottom: 3rem;
   padding: 2rem;
-  border-radius: 3px;
+  border-radius: 10px;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05), 0 5px 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transition: all 100ms ease-in-out;
+  width: 400px;
+  height: 400px;
 }
 
 .dictionary > .term > dt {

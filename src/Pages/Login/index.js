@@ -61,8 +61,7 @@ const Login = () => {
           disabled={loading === true || !validadorInput()}
         />
         <SubContainerSign>
-          <p>Não possui conta?</p>
-          <NavLink to="cadastrar">Cadastrar</NavLink>
+          <p>Não possui conta? <NavLink to="/cadastrar">Cadastrar</NavLink></p>
         </SubContainerSign>
       </Form>
     </Container>

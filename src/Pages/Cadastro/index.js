@@ -93,8 +93,7 @@ const Cadastro = () => {
         
         />
         <SubContainerSign>
-          <p>Já possui conta?</p>
-          <NavLink to="*">Login</NavLink>
+          <p>Já possui conta? <NavLink to="/Login">Login</NavLink></p>
         </SubContainerSign>
       </Form>
     </Container>
