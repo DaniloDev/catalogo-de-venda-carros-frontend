@@ -35,3 +35,12 @@ export const Button = styled.button`
   color: white;
   height: 42px;
 `;
+
+export const ButtonLogout = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  height: 42px;
+`;

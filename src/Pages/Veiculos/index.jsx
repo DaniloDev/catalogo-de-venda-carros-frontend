@@ -3,7 +3,6 @@ import Footer from "./footer";
 import Card from "./Card";
 import { useState } from "react";
 import { api } from '../../Services/api'
-import { NavLink, useNavigate } from 'react-router-dom'
 import Header from "./header";
 
 const Veiculos = ()  =>{
@@ -17,7 +16,10 @@ useEffect(()=> {
 const getVeiculos = async() => {
   // GET
   const response = api.get("/veiculos")
-  setVeiculos([...veiculos, ...(await response).data])
+
+  const sortRespnse = (await response).data.sort((a,b)=>{return a.price - b.price})
+
+  setVeiculos([...veiculos, ...sortRespnse])
 }
 
 

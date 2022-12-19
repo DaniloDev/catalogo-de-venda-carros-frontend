@@ -11,13 +11,12 @@ const Routering = () => {
   return ( 
     <Router>
       <Routes>
-      <Route path="/admveiculos" element={<AdmVeiculos/>} />
        <Route path="*" element={<Veiculos/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/cadastrar" element={<Cadastro/>} />
-        <Route path="/home" element={
+        <Route path="/admveiculos" element={
           <ProtectedRoutes>
-            <h1>Home</h1> 
+             <AdmVeiculos/>
           </ProtectedRoutes>
           }
         />

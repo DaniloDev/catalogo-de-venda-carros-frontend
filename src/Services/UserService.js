@@ -1,31 +1,17 @@
-import axios from 'axios';
+import { api } from '../Services/api';
 
 export default class UserServices {
-  config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'x-acess-token': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWExMjNmODZlMjIxNzdjMGNlNzBmZiIsInVzZXJuYW1lIjoiZGFuaWxvIiwicm9sZXMiOlsicmVzdHJpdG8iLCJhZG1pbiJdLCJpYXQiOjE2NzEwNDMwODV9.HXc6hyXT9fphZKSjWJ0L4tk53OVbhUcp2v1z2Ml4o_Q`
-    }
-};
-  constructor () {
-    this.axios = axios.create({
-      baseURL: process.env.REACT_APP_API_LOGIN
-    })
-  }
 
-
-  
   async login (dados) {
-    const {data} = await this.axios.post('/login', dados)
+    const {data} = await api.post('/auth', dados)
 
-    if (data) {
-      localStorage.setItem("nome", data.user.nome)
-      localStorage.setItem("email", data.user.email)
-      localStorage.setItem("token", data.token.token)
-
+    if (data.success == true) {
+      console.log("DATA ", data)
+      localStorage.setItem("catvendascarros", JSON.stringify(data))
       return true
     }
 
+    alert("Usuário e/ou senha incorretos!")
     return
   }
 
@@ -75,14 +61,12 @@ console.log("CONSOLE ", response)
   }
 
   usuarioAutenticado () {
-    return localStorage.getItem("token") != undefined ? true : false
-    // return typeof localStorage.getItem("token")
+    return localStorage.getItem("catvendascarros") != undefined ? true : false
+    // return typeof localStorage.getItem("catvendascarros")
   }
 
   //Desafio ---> implemente um botão que chama essa função dentro da página Home
   async logout () {
-    localStorage.removeItem("token")
-    localStorage.removeItem("nome")
-    localStorage.removeItem("email")
+    localStorage.removeItem("catvendascarros")
   }
 }

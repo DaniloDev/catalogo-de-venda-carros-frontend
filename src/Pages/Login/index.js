@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Container, Form, SubContainerSign } from './styles'
 import Input from '../../Components/Input/index'
 import Botao from '../../Components/Botao/index'
@@ -13,6 +13,15 @@ const Login = () => {
   const [form, setForm] = useState([])
   const navigate = useNavigate()
 
+
+  useEffect(()=>{
+    if(localStorage.getItem('catvendascarros')){
+      navigate('/admveiculos')
+    }else{
+      navigate('/login')
+    }
+  }, [])
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -20,8 +29,7 @@ const Login = () => {
       const response = await userService.login(form)
       console.log('response do Login', response)
       if (response === true) {
-        alert('usuário Logado com Sucesso')
-        navigate('/home')
+        navigate('/admveiculos')
       }
       setLoading(false)
     }
@@ -60,9 +68,6 @@ const Login = () => {
           onClick={handleSubmit}
           disabled={loading === true || !validadorInput()}
         />
-        <SubContainerSign>
-          <p>Não possui conta? <NavLink to="/cadastrar">Cadastrar</NavLink></p>
-        </SubContainerSign>
       </Form>
     </Container>
     
