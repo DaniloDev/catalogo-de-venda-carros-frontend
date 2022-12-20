@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Search  } from "./styles";
 
-export default function Header(){
+export default function Header({ searchVeiculos }){
     return(
      <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
@@ -13,6 +14,10 @@ export default function Header(){
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <Search onChange={(str) => searchVeiculos(str.target.value)}
+                autoCapitalize="none" />
+                </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="/">Home</a>
                 </li>

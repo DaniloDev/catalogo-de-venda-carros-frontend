@@ -38,13 +38,10 @@ function AdmVeiculos() {
 
   return (
     <>
-    <Header />
+    <Header searchVeiculos={searchVeiculos}/>
       <Container>
         <Title>VEICULOS</Title>
         <div style={{ marginBottom: 20}}></div>
-        <Search onChange={(str) => searchVeiculos(str.target.value)}
-          autoCapitalize="none"
-          />
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getVeiculos={getVeiculos} />
         <Grid 
          setOnEdit={setOnEdit} 

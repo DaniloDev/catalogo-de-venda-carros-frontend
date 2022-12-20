@@ -3,11 +3,10 @@ import { NavLink } from "react-router-dom";
 import { Search  } from "./styles";
 
 const dadosStorage = localStorage.getItem('catvendascarros')
-let status = ''
+let nameUser = JSON.parse(dadosStorage)?.name
+let status = "Entrar"
   if(dadosStorage){
-     status = 'Admin'
-  }else{
-    status = "Entrar"
+     status = nameUser.substr(0, 1);
   }
 export default function Header({ searchVeiculos }){
     return(
@@ -31,7 +30,7 @@ export default function Header({ searchVeiculos }){
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger">   
-                     <NavLink to="/Login">{status}</NavLink>
+                     <NavLink to="/Login">{ status !== "Entrar" ? <button style={{ width: 30, backgroundColor: '#d7d7d7', color: "black", cursor: 'pointer', border: 'none'}}>{status}</button> : status}</NavLink>
                     </a>
                 </li>
                 </ul>
