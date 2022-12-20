@@ -1,9 +1,14 @@
 import axios from "axios";
 
+const dadosStorage = localStorage.getItem('catvendascarros')
+
+    if(dadosStorage){
+      var tokenUser = JSON.parse(dadosStorage)
+    }
 
 const headers = {
     "Content-type": "application/json; charset=UTF-8",
-    'x-acess-token': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWExMjNmODZlMjIxNzdjMGNlNzBmZiIsInVzZXJuYW1lIjoiZGFuaWxvIiwicm9sZXMiOlsicmVzdHJpdG8iLCJhZG1pbiJdLCJpYXQiOjE2NzEwNDMwODV9.HXc6hyXT9fphZKSjWJ0L4tk53OVbhUcp2v1z2Ml4o_Q`
+    'x-acess-token': tokenUser? tokenUser.token : ''
   }
 
 

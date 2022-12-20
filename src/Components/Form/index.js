@@ -1,21 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { FormContainer, InputArea, Input, Label, Button, ButtonLogout } from './styles'
+import { FormContainer, InputArea, Input, Label, Button } from './styles'
 import { api } from '../../Services/api'
 import UserServices from "../../Services/UserService";
 import { useNavigate } from "react-router-dom";
+import { currencyMask } from '../../Utils/mask' 
 
 const user = new UserServices()
 
 
 const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
   const [name, setName] = useState('')
+  const [state, setState] = useState({ price: ''})
 
   const ref = useRef();
 
   const veiculo = ref.current;
 
   const navigate = useNavigate()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setState({...state, [e.target.name]: e.target.value})
+  console.log(state.price)
+  }
+  
   useEffect(() => {
     const dadosStorage = localStorage.getItem('catvendascarros')
 
@@ -28,6 +36,7 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
 
       veiculo.name.value = onEdit.name;
       veiculo.price.value = onEdit.price;
+      veiculo.previousprice.value = onEdit.previousprice;
       veiculo.brand.value = onEdit.brand;
       veiculo.model.value = onEdit.model;
       veiculo.photo.value = onEdit.photo;
@@ -40,6 +49,7 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
     if (
       !veiculo.name.value ||
       !veiculo.price.value ||
+      !veiculo.previousprice.value ||
       !veiculo.brand.value ||
       !veiculo.model.value ||
       !veiculo.photo.value
@@ -50,7 +60,8 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
         await api
           .put("/admVeiculos/" + onEdit._id, {
             name: veiculo.name.value,
-            price: veiculo.price.value,
+            price: veiculo.price.value.replace(/,/g, "").replace(/\./g, ""),
+            previousprice: veiculo.previousprice.value.replace(/,/g, "").replace(/\./g, ""),
             brand: veiculo.brand.value,
             model: veiculo.model.value,
             photo: veiculo.photo.value
@@ -64,18 +75,23 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
         await api
           .post("/admVeiculos", {
             name: veiculo.name.value,
-            price: veiculo.price.value,
+            price: veiculo.price.value.replace(/,/g, "").replace(/\./g, ""),
+            previousprice: veiculo.previousprice.value.replace(/,/g, "").replace(/\./g, ""),
             brand: veiculo.brand.value,
             model: veiculo.model.value,
             photo: veiculo.photo.value
           })
-          .then(({ data }) => toast.success(data))
+          .then(data=> {
+            toast.success(data)
+            window.location.reload()
+          })
           .catch(({ data }) => toast.error(data));
       }
     }
 
     veiculo.name.value = '';
     veiculo.price.value = '';
+    veiculo.previousprice.value = ''
     veiculo.brand.value = '';
     veiculo.model.value = '';
     veiculo.photo.value = '';
@@ -91,29 +107,26 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
   }
 
   return (
-    <>
-        <FormContainer ref={ref} onSubmit={handleSair}>
-        <span>Bem vindo, {name}</span>
-        <ButtonLogout type="submit">Sair</ButtonLogout>
-   
-        </FormContainer>
-    
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label>Nome</Label>
-        <Input name="name" />
+        <Input name="name" type="text"/>
       </InputArea>
       <InputArea>
         <Label>Preço</Label>
-        <Input name="price" type="number" />
+        <Input name="price" type="text" onChange={(e)=> handleChange(currencyMask(e))} />
+      </InputArea>
+      <InputArea>
+        <Label>Preço Anterior</Label>
+        <Input name="previousprice" type="text" onChange={(e)=> handleChange(currencyMask(e))} />
       </InputArea>
       <InputArea>
         <Label>Marca</Label>
-        <Input name="brand" />
+        <Input name="brand" type="text" />
       </InputArea>
       <InputArea>
         <Label>Modelo</Label>
-        <Input name="model" type="text" />
+        <Input name="model" type="number" />
       </InputArea>
 
       <InputArea>
@@ -123,7 +136,6 @@ const Form = ({ getVeiculos, onEdit, setOnEdit }) => {
 
       <Button type="submit">SALVAR</Button>
     </FormContainer>
-    </>
   );
 };
 

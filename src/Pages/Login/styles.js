@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   min-width: 100vw;
-  background-color: #343a40;
+  background-color: #201d1d;
 
 `
 
@@ -16,7 +16,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #201d1d;
+  background-color: #fff;
   border-radius: 5px;
   width: 100%;
   max-width: 450px;

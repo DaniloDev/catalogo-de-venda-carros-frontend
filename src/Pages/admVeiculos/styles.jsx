@@ -28,6 +28,17 @@ export const Container = styled.div`
   gap: 10px;
 `;
 
+export const Search = styled.input.attrs({
+  placeholder: "Pesquisar",
+  marginHorizontal: 20
+})`
+border-color: #000;
+border-width: 1px;
+border-radius: 25px;
+height: 40px;
+padding-left: 10px;
+margin-top: 5px;
+`
 export const Title = styled.h2``;
 
 export default Styles;

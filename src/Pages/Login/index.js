@@ -49,7 +49,9 @@ const Login = () => {
   return (
     <Container>
       <Form>
-        <h1>Faça o seu Login 👋</h1>
+      <a class="navbar-brand js-scroll-trigger" href="/login">
+                <img src="https://www.verzel.com.br/static/media/logo_verzel.0335b665.svg" height="70" /></a>
+        <h34 style={{ color: 'black', fontWight: 'bold', fontSize: 28}}>Acesso Restrito</h34>
         <Input
           name='email'
           placeholder='Digite o seu e-mail'
